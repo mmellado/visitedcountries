@@ -1,0 +1,14 @@
+// Reset
+@import 'reset';
+
+$blue: #81d6ff;
+$purple: #aa81ff;
+$melon: #ffdece;
+$pink: #ff81d6;
+
+// Layout
+@import '../containers/Layout/index';
+
+// Containers
+@import '../containers/Home/index';
+
