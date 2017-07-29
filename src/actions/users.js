@@ -73,12 +73,20 @@ function updateUserCountriesError() {
   };
 }
 
-export function updateUserCountries(countries) {
+export function updateUserCountries(dirtyCountries) {
   return (dispatch, getState) => {
     const userState = getState().users;
     const uid = userState.uid;
 
-    dispatch(updateUserCountriesRequest)
+    const countries = [];
+
+    dirtyCountries.forEach(c => {
+      if (c !== null) {
+        countries.push(c);
+      }
+    });
+
+    dispatch(updateUserCountriesRequest);
 
     fetch(`${API_URL}/${uid}`, {
       method: 'PUT',
