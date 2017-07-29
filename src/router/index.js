@@ -10,7 +10,7 @@ import {
 export default class Router extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/visitedcountries">
         <Layout>
           <Route exact path="/" component={Home}/>
         </Layout>
