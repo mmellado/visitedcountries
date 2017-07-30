@@ -4,6 +4,7 @@ const initialState = {
   isLoggedIn: false,
   userName: null,
   countries: [],
+  nonVisitedCountries: {},
   isUpdatingDB: false,
 };
 
@@ -20,6 +21,7 @@ export default function user(state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         userName: action.userName,
         countries: action.countries,
+        nonVisitedCountries: action.nonVisitedCountries,
       });
     case 'GET_USER_DATA_ERROR':
       return Object.assign({}, state, {

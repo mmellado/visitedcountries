@@ -7,6 +7,7 @@ import setActivePage from '../../actions/navigation';
 import { getUserData, updateUserCountries } from '../../actions/users';
 import worldMap from '../../constants/map';
 import countriesList from '../../constants/countries';
+import SearchBox from '../../components/SearchBox';
 
 class Home extends Component {
   static propTypes = {
@@ -93,14 +94,16 @@ class Home extends Component {
     const countryId = e.target.getAttribute('id');
     const countries = this.props.user.countries;
 
-    if (countries.includes(countryId)) {
-      const idx = countries.indexOf(countryId);
-      countries.splice(idx, 1);
-    } else {
-      countries.push(countryId);
-    }
+    if (countryId) {
+      if (countries.includes(countryId)) {
+        const idx = countries.indexOf(countryId);
+        countries.splice(idx, 1);
+      } else {
+        countries.push(countryId);
+      }
 
-    this.props.updateUserCountries(countries)
+      this.props.updateUserCountries(countries);
+    }
 
   }
 
@@ -205,8 +208,9 @@ class Home extends Component {
           onClick={this.getClickedCountry}
           onMouseOver={this.getHoveredCountry}
         >
-          <h3>{this.state.hoveredCountry}</h3>
+          <SearchBox />
           {worldMap}
+          <h3>{this.state.hoveredCountry}</h3>
         </div>
         <div className="page-wrapper">
           {this._getListOfSelectedCountries()}
@@ -216,28 +220,39 @@ class Home extends Component {
   }
 
   _getListOfSelectedCountries = () => {
-    const { countries } = this.props.user;
+    const { countries, nonVisitedCountries } = this.props.user;
     countries.sort();
 
     return (
       <div className="places-wrapper">
-        <h2>Places you have visited</h2>
-        <ul className="countries-list">
-          {
-            countries.map((c, i) => <li key={i} className="list-el">{countriesList[c]}</li>)
-          }
-        </ul>
-
-        <h2>Places left to be visited</h2>
-        <ul className="countries-list">
-          {
-            Object.keys(countriesList).map((key, i) => {
-              if (!countries.includes(key)) {
-                return <li key={i} className="list-el">{countriesList[key]}</li>;
-              }
-            })
-          }
-        </ul>
+        {
+          countries.length
+          ?
+            <div>
+              <h2>Places you have visited</h2>
+              <ul className="countries-list">
+                {
+                  countries.map((key, i) => <li key={i} className="list-el">{countriesList[key]}</li>)
+                }
+              </ul>
+            </div>
+          :
+              null
+        }
+        {
+          nonVisitedCountries && Object.keys(nonVisitedCountries).length
+          ?
+            <div>
+              <h2>Places left to be visited</h2>
+              <ul className="countries-list">
+                {
+                  Object.keys(nonVisitedCountries).map((key, i) => <li key={i} className="list-el">{nonVisitedCountries[key]}</li>)
+                }
+              </ul>
+            </div>
+          :
+            null
+        }
       </div>
     );
   }

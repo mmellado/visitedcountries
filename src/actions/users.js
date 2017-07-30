@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import countriesList from '../constants/countries';
 import * as API_DATA from '../constants/api';
 
 const API_URL = `${API_DATA.API_URL}${API_DATA.ENDPOINT}`;
@@ -9,13 +10,14 @@ function getUserDataRequest() {
   }
 }
 
-function getUserDataResponse(isLoggedIn, uid, userName, countries) {
+function getUserDataResponse(isLoggedIn, uid, userName, countries, nonVisitedCountries) {
   return {
     type: 'GET_USER_DATA_RESPONSE',
     isLoggedIn,
     uid,
     userName,
-    countries
+    countries,
+    nonVisitedCountries,
   }
 }
 
@@ -42,14 +44,20 @@ export function getUserData() {
             }
           })
             .then(res => res.json())
-            .then(res => dispatch(getUserDataResponse(isLoggedIn, uid, userName, res.countries)))
+            .then(res => {
+              const nonVisitedCountries = Object.assign({}, countriesList);
+              res.countries.map(c => {
+                delete nonVisitedCountries[c];
+              });
+              dispatch(getUserDataResponse(isLoggedIn, uid, userName, res.countries, nonVisitedCountries));
+            })
             .catch(err => {
               console.error(err); //eslint-disable-line no-console
               dispatch(getUserDataError());
             });
         });
       } else {
-        dispatch(getUserDataResponse(false, null, null, []));
+        dispatch(getUserDataResponse(false, null, null, [], null));
       }
     });
   }
