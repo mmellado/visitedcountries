@@ -160,7 +160,7 @@ const countriesList = {
   TM: "Turkmenistan",
   TN: "Tunisia",
   TR: "Turkey",
-  TT: "Trin{ idad and Tobago",
+  TT: "Trinidad and Tobago",
   TW: "Taiwan",
   TZ: "Tanzania",
   UA: "Ukraine",
