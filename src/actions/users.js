@@ -108,12 +108,12 @@ export function updateUserCountries(dirtyCountries) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({countries}),
+      body: JSON.stringify({ countries }),
     })
       .then(() => dispatch(updateUserCountriesResponse(countries, nonVisitedCountries)))
       .catch(err => {
         console.error(err); //eslint-disable-line no-console
         dispatch(updateUserCountriesError());
-      })
+      });
   }
 }
