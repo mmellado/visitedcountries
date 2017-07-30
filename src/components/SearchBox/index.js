@@ -21,7 +21,9 @@ class SearchBox extends Component {
   enableSearch = () => {
     this.setState({
       isSearchVisible: !this.state.isSearchVisible,
-    })
+      typeAheadOptions: null,
+      searchBoxVal: '',
+    });
   }
 
   searchForCountry = (e) => {
