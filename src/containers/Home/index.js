@@ -168,14 +168,8 @@ class Home extends Component {
               <img src={imgSrc} />
             </div>
             <div className="poster-text">
-              <h1>Keep track of the countries you have visited</h1>
-              <p>Just login with Facebook to get started</p>
-              <FacebookLogin
-                  appappId="1639130619470630"
-                  autoLoad={true}
-                  fields="public_profile,email"
-                  callback={this.checkAndSetLoginStatus}
-              />
+              <h1>Opps! We are not available :(</h1>
+              <p>We are currently undergoing some maintenance. We should be back shortly :)</p>
             </div>
           </div>
         </div>
