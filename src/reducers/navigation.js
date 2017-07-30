@@ -1,5 +1,5 @@
 const initialState = {
-  title: 'Visited Countries',
+  title: 'Visited Countries Tracker',
   page: 'home'
 };
 

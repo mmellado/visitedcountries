@@ -56,7 +56,7 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    this.props.setActivePage('Visited Countries', 'home');
+    this.props.setActivePage('Visited Countries Tracker', 'home');
 
     this.checkAndSetLoginStatus();
     this.paintSelectedCountries(this.props.user.countries);
