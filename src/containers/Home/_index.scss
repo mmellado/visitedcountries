@@ -203,7 +203,8 @@
       transform: translateX(-50%);
 
       .land {
-        stroke: $blue;
+        stroke: #32A;
+        stroke-width: .5;
         fill: $melon;
         cursor: pointer;
 
