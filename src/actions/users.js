@@ -89,12 +89,12 @@ export function updateUserCountries(dirtyCountries) {
     const countries = [];
 
     dirtyCountries.forEach(c => {
-      if (c !== null) {
-        countries.push(c);
-      }
+      countries.push(c);
     });
 
-    dispatch(updateUserCountriesRequest);
+    countries.sort();
+
+    dispatch(updateUserCountriesRequest());
 
     fetch(`${API_URL}/${uid}`, {
       method: 'PUT',
