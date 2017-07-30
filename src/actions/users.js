@@ -69,9 +69,11 @@ function updateUserCountriesRequest() {
   };
 }
 
-function updateUserCountriesResponse() {
+function updateUserCountriesResponse(countries, nonVisitedCountries) {
   return {
     type: 'UPDATE_USER_COUNTRIES_RESPONSE',
+    countries,
+    nonVisitedCountries,
   };
 }
 
@@ -94,6 +96,11 @@ export function updateUserCountries(dirtyCountries) {
 
     countries.sort();
 
+    const nonVisitedCountries = Object.assign({}, countriesList);
+    countries.map(c => {
+      delete nonVisitedCountries[c];
+    });
+
     dispatch(updateUserCountriesRequest());
 
     fetch(`${API_URL}/${uid}`, {
@@ -103,7 +110,7 @@ export function updateUserCountries(dirtyCountries) {
       },
       body: JSON.stringify({countries}),
     })
-      .then(res => dispatch(updateUserCountriesResponse(res)))
+      .then(() => dispatch(updateUserCountriesResponse(countries, nonVisitedCountries)))
       .catch(err => {
         console.error(err); //eslint-disable-line no-console
         dispatch(updateUserCountriesError());

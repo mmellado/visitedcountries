@@ -34,6 +34,8 @@ export default function user(state = initialState, action) {
     case 'UPDATE_USER_COUNTRIES_RESPONSE':
       return Object.assign({}, state, {
         isUpdatingDB: false,
+        countries: action.countries,
+        nonVisitedCountries: action.nonVisitedCountries,
       });
     case 'UPDATE_USER_COUNTRIES_ERROR':
       return Object.assign({}, state, {
