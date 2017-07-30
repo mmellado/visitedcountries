@@ -217,6 +217,7 @@ class Home extends Component {
             miniaturePosition="none"
             className="world-map"
             background="#81d6ff"
+            SVGBackground="#81d6ff"
           >
             {worldMap}
           </ReactSVGPanZoom>
