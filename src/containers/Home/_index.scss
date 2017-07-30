@@ -28,11 +28,11 @@
   .video-container .poster img {
       position: absolute;
       z-index: 3;
-      top: 0;
-      min-height: 100vh;
+      top: 50%;
+      min-height: calc(100vh + 200px);
       left: 50%;
       width: auto;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
   }
   .video-container .poster img {
     z-index: 2;
