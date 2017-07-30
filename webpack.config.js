@@ -25,6 +25,8 @@ if (isProduction) {
     "mode": "wrap",
     "ignoreFilenames": ["node_modules"]
   }]);
+} else {
+  webpackPlugins.push(new webpack.EnvironmentPlugin({ 'NODE_ENV': 'development' }));
 }
 
 

@@ -9,8 +9,14 @@ import {
 
 export default class Router extends Component {
   render() {
+    const routerProps = {};
+
+    if (process.env.NODE_ENV === 'production') {
+      routerProps.basename = '/visitedcountries';
+    }
+
     return (
-      <BrowserRouter basename="/visitedcountries">
+      <BrowserRouter {...routerProps}>
         <Layout>
           <Route exact path="/" component={Home}/>
         </Layout>
