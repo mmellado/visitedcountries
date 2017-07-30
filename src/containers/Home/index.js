@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
+import { ReactSVGPanZoom } from 'react-svg-pan-zoom';
 
 import setActivePage from '../../actions/navigation';
 import { getUserData, updateUserCountries } from '../../actions/users';
@@ -209,7 +210,16 @@ class Home extends Component {
           onMouseOver={this.getHoveredCountry}
         >
           <SearchBox />
-          {worldMap}
+          <ReactSVGPanZoom
+            width={1010}
+            height={660}
+            toolbarPosition="right"
+            miniaturePosition="none"
+            className="world-map"
+            background="#81d6ff"
+          >
+            {worldMap}
+          </ReactSVGPanZoom>
           <h3>{this.state.hoveredCountry}</h3>
         </div>
         <div className="page-wrapper">

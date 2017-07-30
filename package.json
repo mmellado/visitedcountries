@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "react-svg-pan-zoom": "^2.10.0",
     "redux-thunk": "^2.2.0"
   }
 }
