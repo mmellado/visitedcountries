@@ -1,6 +1,6 @@
 {
   "name": "visitedcountries",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "My single page app",
   "repository": "",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.6.1",
     "eslint-plugin-react": "^7.1.0",
     "gh-pages": "^1.0.0",
-    "jest": "^20.0.4",
+    "isomorphic-fetch": "^2.2.1",
     "node-sass-chokidar": "^0.0.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -32,7 +32,9 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^15.6.1",
+    "react-svg-pan-zoom": "^2.10.0",
     "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
@@ -44,12 +46,6 @@
     "build": "npm run clean && cross-env NODE_ENV=production webpack",
     "clean": "rimraf dist",
     "lint": "eslint src",
-    "test": "npm run lint && jest",
     "gh-pages": "npm run build && gh-pages -d dist"
-  },
-  "dependencies": {
-    "isomorphic-fetch": "^2.2.1",
-    "react-svg-pan-zoom": "^2.10.0",
-    "redux-thunk": "^2.2.0"
   }
 }
