@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FacebookLogin from 'react-facebook-login';
 import { ReactSVGPanZoom } from 'react-svg-pan-zoom';
 
 import setActivePage from '../../actions/navigation';
@@ -31,15 +30,27 @@ class Home extends Component {
   imgExtension = '.jpg';
   imgIndex = 0;
   interval = null;
+  likeBtn = null;
+  isFBLoginLoaded = null;
 
   state = {
     hoveredCountry: '',
     video: `${this.videoRoute}/${this.videoFiles[this.imgIndex]}${this.videoExtension}`,
     fallbackImg: `${this.imgRoute}/${this.videoFiles[this.imgIndex]}${this.imgExtension}`,
+    isFBSocialLoaded: false,
+    isFBLoginLoaded: false,
   };
 
   constructor(props) {
     super(props);
+
+    FB.Event.subscribe('auth.statusChange', res => {
+      this.checkAndSetLoginStatus();
+
+      if (res.status === 'connected') {
+        this.paintSelectedCountries(this.props.user.countries);
+      }
+    });
 
     if (!this.props.user.isLoggedIn) {
       this.interval = setInterval(() => {
@@ -76,6 +87,14 @@ class Home extends Component {
       el.classList.remove('visited');
     });
     this.paintSelectedCountries(this.props.user.countries);
+
+    if (this.likeBtn && !this.state.isFBLikeLoaded) {
+      FB.XFBML.parse();
+      this.setState({ isFBLikeLoaded: true });
+    } else if (this.loginBtn && !this.state.isFBLoginLoaded) {
+      FB.XFBML.parse();
+      this.setState({ isFBLoginLoaded: true });
+    }
   }
 
   paintSelectedCountries(countries) {
@@ -171,11 +190,15 @@ class Home extends Component {
             <div className="poster-text">
               <h1>Keep track of the countries you have visited</h1>
               <p>Just login with Facebook to get started</p>
-              <FacebookLogin
-                  appappId="1639130619470630"
-                  autoLoad={true}
-                  fields="public_profile,email"
-                  callback={this.checkAndSetLoginStatus}
+              <div
+                ref={loginBtn => this.loginBtn = loginBtn}
+                className="fb-login-button"
+                data-max-rows="1"
+                data-size="large"
+                data-button-type="login_with"
+                data-show-faces="false"
+                data-auto-logout-link="false"
+                data-use-continue-as="false"
               />
             </div>
           </div>
@@ -222,6 +245,18 @@ class Home extends Component {
             {worldMap}
           </ReactSVGPanZoom>
           <h3>{this.state.hoveredCountry}</h3>
+          <div className="social">
+            <div
+              ref={likeBtn => this.likeBtn = likeBtn}
+              className="fb-like"
+              data-href="https://mmellado.github.io/visitedcountries/"
+              data-layout="button_count"
+              data-action="like"
+              data-size="large"
+              data-show-faces="true"
+              data-share="true"
+            />
+            </div>
         </div>
         <div className="page-wrapper">
           {this._getListOfSelectedCountries()}

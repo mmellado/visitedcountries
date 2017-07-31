@@ -196,6 +196,16 @@
       z-index: 5;
     }
 
+    .social {
+      overflow: hidden;
+
+      .fb-like {
+        float: right;
+        margin-right: 25px;
+        padding: 10px;
+      }
+    }
+
     .world-map {
       width: 60%;
       position: relative;
