@@ -18,3 +18,4 @@ If there's more features you'd like to have in this app, please file an issue or
 
 - List for "Bucket listed" countries marked in the map with a different color
 - User specific "Read Only" page to be shared width friends
+- Typeahead selection with keyboard
